@@ -1,13 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test('verify my career goal site', async ({ page }) => {
-  // 1. Go to a website (e.g., a simple test site)
-  await page.goto('https://example.com');
-
-  // 2. Check if the header is correct
-  const header = page.locator('h1');
-  await expect(header).toHaveText('Example Domain');
-
-  // 3. Take a screenshot so you can see it in the report!
-  await page.screenshot({ path: 'screenshot.png' });
+test('Real Estate Search', async ({ page }) => {
+  await page.goto('https://www.realestate.com.au/buy');
+  const searchInput = page.getByPlaceholder('Search by state, suburb or postcode');
+  await searchInput.fill('Glendenning');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/.*glendenning/);
 });
